@@ -34,5 +34,15 @@ namespace KnockoutTraining.Controllers
         {
             return View();
         }
+
+        public ActionResult Events()
+        {
+            return View();
+        }
+
+        public ActionResult Collections()
+        {
+            return View();
+        }
     }
 }
