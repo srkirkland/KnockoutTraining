@@ -24,5 +24,10 @@ namespace KnockoutTraining.Controllers
         {
             return View();
         }
+
+        public ActionResult Observable()
+        {
+            return View();
+        }
     }
 }
