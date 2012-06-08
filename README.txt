@@ -1,0 +1,1 @@
+Knockout.js training session solution for 6/13
