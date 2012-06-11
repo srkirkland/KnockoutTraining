@@ -1,0 +1,139 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Complex Collections";
+}
+
+<h2>Complex Collections</h2>
+
+<h3>Result</h3>
+<div class="well">
+    <h5><span data-bind="text: personName"></span> would like the following order:</h5>
+    <button data-bind="click: addFoodLine">Add Another Line</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Food</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: lines">
+            <tr>
+                <td><select data-bind="options: $root.foods, value: food, 
+                                optionsText: function(food){ return food.name + ' ($' + food.price.toFixed(2) + ')' }"></select></td>
+                <td><input type="number" data-bind="value: quantity"/></td>
+                <td><span data-bind="text: total"></span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Grand Total: </td>
+                <td data-bind="text: $root.grandTotal"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    function LineItem(food, quantity) {
+        var self = this;
+        self.food = ko.observable(food);
+        self.quantity = ko.observable(quantity);
+
+        self.total = ko.computed(function () {
+            var total = self.food().price * self.quantity();
+            return total.toFixed(2);
+        });
+    }
+
+    function MyViewModel() {
+        var self = this;
+        self.personName = 'Bob Dobalina';
+        self.tax = ko.observable("7.75");
+        
+        self.foods = [
+            { name: 'Tacos', price: 1.50 },
+            { name: 'Flautas', price: 2.00 },
+            { name: 'Burritos', price: 3.50 },
+            { name: 'Fajitas', price: 4.75 }
+        ];
+
+        self.lines = ko.observableArray([
+                new LineItem(self.foods[0], 2),
+                new LineItem(self.foods[1], 1)
+            ]);
+
+        self.addFoodLine = function () {
+            self.lines.push(new LineItem(self.foods[0], 1)); //default to 1 taco
+        };
+
+        self.grandTotal = ko.computed(function () {
+            var total = 0;
+            $.each(self.lines(), function (i, line) {
+                console.log(line);
+                total += parseFloat(line.total());
+            });
+            return '$' + total.toFixed(2);
+        });
+    }
+
+    ko.applyBindings(new MyViewModel());
+</script>
+
+<h3>Script</h3>
+<div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">&lt;</span>script<span class="sh_symbol">&gt;</span></li><li>    <span class="sh_keyword">function</span> <span class="sh_function">LineItem</span><span class="sh_symbol">(</span>food<span class="sh_symbol">,</span> quantity<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span></li><li>        <span class="sh_keyword">var</span> self <span class="sh_symbol">=</span> <span class="sh_keyword">this</span><span class="sh_symbol">;</span></li><li>        self<span class="sh_symbol">.</span>food <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observable</span><span class="sh_symbol">(</span>food<span class="sh_symbol">);</span></li><li>        self<span class="sh_symbol">.</span>quantity <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observable</span><span class="sh_symbol">(</span>quantity<span class="sh_symbol">);</span></li><li></li><li>        self<span class="sh_symbol">.</span>total <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">computed</span><span class="sh_symbol">(</span><span class="sh_keyword">function</span> <span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li>            <span class="sh_keyword">var</span> total <span class="sh_symbol">=</span> self<span class="sh_symbol">.</span><span class="sh_function">food</span><span class="sh_symbol">().</span>price <span class="sh_symbol">*</span> self<span class="sh_symbol">.</span><span class="sh_function">quantity</span><span class="sh_symbol">();</span></li><li>            <span class="sh_keyword">return</span> total<span class="sh_symbol">.</span><span class="sh_function">toFixed</span><span class="sh_symbol">(</span><span class="sh_number">2</span><span class="sh_symbol">);</span></li><li>        <span class="sh_cbracket">}</span><span class="sh_symbol">);</span></li><li>    <span class="sh_cbracket">}</span></li><li></li><li>    <span class="sh_keyword">function</span> <span class="sh_function">MyViewModel</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li>        <span class="sh_keyword">var</span> self <span class="sh_symbol">=</span> <span class="sh_keyword">this</span><span class="sh_symbol">;</span></li><li>        self<span class="sh_symbol">.</span>personName <span class="sh_symbol">=</span> <span class="sh_string">'Bob Dobalina'</span><span class="sh_symbol">;</span></li><li>        self<span class="sh_symbol">.</span>foods <span class="sh_symbol">=</span> <span class="sh_symbol">[</span></li><li>            <span class="sh_cbracket">{</span> name<span class="sh_symbol">:</span> <span class="sh_string">'Tacos'</span><span class="sh_symbol">,</span> price<span class="sh_symbol">:</span> <span class="sh_number">1.50</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span></li><li>            <span class="sh_cbracket">{</span> name<span class="sh_symbol">:</span> <span class="sh_string">'Flautas'</span><span class="sh_symbol">,</span> price<span class="sh_symbol">:</span> <span class="sh_number">2.00</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span></li><li>            <span class="sh_cbracket">{</span> name<span class="sh_symbol">:</span> <span class="sh_string">'Burritos'</span><span class="sh_symbol">,</span> price<span class="sh_symbol">:</span> <span class="sh_number">3.50</span> <span class="sh_cbracket">}</span><span class="sh_symbol">,</span></li><li>            <span class="sh_cbracket">{</span> name<span class="sh_symbol">:</span> <span class="sh_string">'Fajitas'</span><span class="sh_symbol">,</span> price<span class="sh_symbol">:</span> <span class="sh_number">4.75</span> <span class="sh_cbracket">}</span></li><li>        <span class="sh_symbol">];</span></li><li></li><li>        self<span class="sh_symbol">.</span>lines <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observableArray</span><span class="sh_symbol">([</span></li><li>                <span class="sh_keyword">new</span> <span class="sh_function">LineItem</span><span class="sh_symbol">(</span>self<span class="sh_symbol">.</span>foods<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">],</span> <span class="sh_number">2</span><span class="sh_symbol">),</span></li><li>                <span class="sh_keyword">new</span> <span class="sh_function">LineItem</span><span class="sh_symbol">(</span>self<span class="sh_symbol">.</span>foods<span class="sh_symbol">[</span><span class="sh_number">1</span><span class="sh_symbol">],</span> <span class="sh_number">1</span><span class="sh_symbol">)</span></li><li>            <span class="sh_symbol">]);</span></li><li></li><li>        self<span class="sh_symbol">.</span>addFoodLine <span class="sh_symbol">=</span> <span class="sh_keyword">function</span> <span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li>            self<span class="sh_symbol">.</span>lines<span class="sh_symbol">.</span><span class="sh_function">push</span><span class="sh_symbol">(</span><span class="sh_keyword">new</span> <span class="sh_function">LineItem</span><span class="sh_symbol">(</span>self<span class="sh_symbol">.</span>foods<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">],</span> <span class="sh_number">1</span><span class="sh_symbol">));</span> <span class="sh_comment">//default to 1 taco</span></li><li>        <span class="sh_cbracket">}</span><span class="sh_symbol">;</span></li><li>    <span class="sh_cbracket">}</span></li><li></li><li>    ko<span class="sh_symbol">.</span><span class="sh_function">applyBindings</span><span class="sh_symbol">(</span><span class="sh_keyword">new</span> <span class="sh_function">MyViewModel</span><span class="sh_symbol">());</span></li><li><span class="sh_symbol">&lt;/</span>script<span class="sh_symbol">&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;script&gt;
+    function LineItem(food, quantity) {
+        var self = this;
+        self.food = ko.observable(food);
+        self.quantity = ko.observable(quantity);
+
+        self.total = ko.computed(function () {
+            var total = self.food().price * self.quantity();
+            return total.toFixed(2);
+        });
+    }
+
+    function MyViewModel() {
+        var self = this;
+        self.personName = 'Bob Dobalina';
+        self.foods = [
+            { name: 'Tacos', price: 1.50 },
+            { name: 'Flautas', price: 2.00 },
+            { name: 'Burritos', price: 3.50 },
+            { name: 'Fajitas', price: 4.75 }
+        ];
+
+        self.lines = ko.observableArray([
+                new LineItem(self.foods[0], 2),
+                new LineItem(self.foods[1], 1)
+            ]);
+
+        self.addFoodLine = function () {
+            self.lines.push(new LineItem(self.foods[0], 1)); //default to 1 taco
+        };
+    }
+
+    ko.applyBindings(new MyViewModel());
+&lt;/script&gt;</pre></div></div>
+
+<h3>Html</h3>
+<div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_html snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_keyword">&lt;h5&gt;&lt;span</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"text: personName"</span><span class="sh_keyword">&gt;&lt;/span&gt;</span> would like the following order:<span class="sh_keyword">&lt;/h5&gt;</span></li><li><span class="sh_keyword">&lt;table&gt;</span></li><li>    <span class="sh_keyword">&lt;thead&gt;</span></li><li>        <span class="sh_keyword">&lt;tr&gt;</span></li><li>            <span class="sh_keyword">&lt;th&gt;</span>Food<span class="sh_keyword">&lt;/th&gt;</span></li><li>            <span class="sh_keyword">&lt;th&gt;</span>Quantity<span class="sh_keyword">&lt;/th&gt;</span></li><li>            <span class="sh_keyword">&lt;th&gt;</span>Total<span class="sh_keyword">&lt;/th&gt;</span></li><li>        <span class="sh_keyword">&lt;/tr&gt;</span></li><li>    <span class="sh_keyword">&lt;/thead&gt;</span></li><li>    <span class="sh_keyword">&lt;tbody</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"foreach: lines"</span><span class="sh_keyword">&gt;</span></li><li>        <span class="sh_keyword">&lt;tr&gt;</span></li><li>            <span class="sh_keyword">&lt;td&gt;&lt;select</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"options: $root.foods, value: food, </span></li><li><span class="sh_string">                            optionsText: function(food){ return food.name + ' ($' + food.price.toFixed(2) + ')' }"</span><span class="sh_keyword">&gt;&lt;/select&gt;&lt;/td&gt;</span></li><li>            <span class="sh_keyword">&lt;td&gt;&lt;input</span> <span class="sh_type">type</span><span class="sh_symbol">=</span><span class="sh_string">"number"</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"value: quantity"</span><span class="sh_keyword">/&gt;&lt;/td&gt;</span></li><li>            <span class="sh_keyword">&lt;td&gt;&lt;span</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"text: total"</span><span class="sh_keyword">&gt;&lt;/span&gt;&lt;/td&gt;</span></li><li>        <span class="sh_keyword">&lt;/tr&gt;</span></li><li>    <span class="sh_keyword">&lt;/tbody&gt;</span></li><li><span class="sh_keyword">&lt;/table&gt;</span></li><li><span class="sh_keyword">&lt;button</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"click: addFoodLine"</span><span class="sh_keyword">&gt;</span>Add Another Line<span class="sh_keyword">&lt;/button&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;h5&gt;&lt;span data-bind="text: personName"&gt;&lt;/span&gt; would like the following order:&lt;/h5&gt;
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Food&lt;/th&gt;
+            &lt;th&gt;Quantity&lt;/th&gt;
+            &lt;th&gt;Total&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody data-bind="foreach: lines"&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;select data-bind="options: $root.foods, value: food, 
+                            optionsText: function(food){ return food.name + ' ($' + food.price.toFixed(2) + ')' }"&gt;&lt;/select&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input type="number" data-bind="value: quantity"/&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;span data-bind="text: total"&gt;&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;button data-bind="click: addFoodLine"&gt;Add Another Line&lt;/button&gt;</pre></div></div>

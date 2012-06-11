@@ -49,5 +49,10 @@ namespace KnockoutTraining.Controllers
         {
             return View();
         }
+
+        public ActionResult Advanced()
+        {
+            return View();
+        }
     }
 }
