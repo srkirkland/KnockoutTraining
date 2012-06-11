@@ -29,7 +29,7 @@
         <tfoot>
             <tr>
                 <td colspan="2">Grand Total: </td>
-                <td data-bind="text: $root.grandTotal"></td>
+                <td data-bind="highlight: $root.grandTotal, text: $root.grandTotal"></td>
             </tr>
         </tfoot>
     </table>
@@ -71,12 +71,18 @@
         self.grandTotal = ko.computed(function () {
             var total = 0;
             $.each(self.lines(), function (i, line) {
-                console.log(line);
                 total += parseFloat(line.total());
             });
             return '$' + total.toFixed(2);
         });
     }
+
+    ko.bindingHandlers.highlight = {
+        update: function (element) {
+            console.log("called", element);
+            $(element).stop(true, true).effect("highlight", {}, 'slow');
+        }
+    };
 
     ko.applyBindings(new MyViewModel());
 </script>
