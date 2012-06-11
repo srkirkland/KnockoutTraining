@@ -54,5 +54,10 @@ namespace KnockoutTraining.Controllers
         {
             return View();
         }
+
+        public ActionResult Structure()
+        {
+            return View();
+        }
     }
 }
