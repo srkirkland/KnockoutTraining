@@ -44,5 +44,10 @@ namespace KnockoutTraining.Controllers
         {
             return View();
         }
+
+        public ActionResult ComplexCollections()
+        {
+            return View();
+        }
     }
 }
