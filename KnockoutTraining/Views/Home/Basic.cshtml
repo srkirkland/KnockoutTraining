@@ -6,19 +6,6 @@
 
 <h2>Basic First Example</h2>
 
-<h3>Script</h3>
-<div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">&lt;</span>script<span class="sh_symbol">&gt;</span></li><li>    <span class="sh_keyword">var</span> myViewModel <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span></li><li>        personName<span class="sh_symbol">:</span> <span class="sh_string">'Bob'</span><span class="sh_symbol">,</span></li><li>        personAge<span class="sh_symbol">:</span> <span class="sh_number">123</span></li><li>    <span class="sh_cbracket">}</span><span class="sh_symbol">;</span></li><li></li><li>    ko<span class="sh_symbol">.</span><span class="sh_function">applyBindings</span><span class="sh_symbol">(</span>myViewModel<span class="sh_symbol">);</span></li><li><span class="sh_symbol">&lt;/</span>script<span class="sh_symbol">&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;script&gt;
-    var myViewModel = {
-        personName: 'Bob',
-        personAge: 12
-    };
-
-    ko.applyBindings(myViewModel);
-&lt;/script&gt;</pre></div></div>
-
-<h3>Html</h3>
-<div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_html snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_keyword">&lt;p&gt;</span>The person's name is <span class="sh_keyword">&lt;strong</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"text: personName"</span><span class="sh_keyword">&gt;&lt;/strong&gt;&lt;/p&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;p&gt;The person's name is &lt;strong data-bind="text: personName"&gt;&lt;/strong&gt;&lt;/p&gt;</pre></div></div>
-
 <h3>Result</h3>
 <div class="well">
     <p>The person's name is <strong data-bind="text: personName"></strong></p>
@@ -33,3 +20,16 @@
 
     ko.applyBindings(myViewModel);
 </script>
+
+<h3>Script</h3>
+<div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">&lt;</span>script<span class="sh_symbol">&gt;</span></li><li>    <span class="sh_keyword">var</span> myViewModel <span class="sh_symbol">=</span> <span class="sh_cbracket">{</span></li><li>        personName<span class="sh_symbol">:</span> <span class="sh_string">'Bob'</span><span class="sh_symbol">,</span></li><li>        personAge<span class="sh_symbol">:</span> <span class="sh_number">123</span></li><li>    <span class="sh_cbracket">}</span><span class="sh_symbol">;</span></li><li></li><li>    ko<span class="sh_symbol">.</span><span class="sh_function">applyBindings</span><span class="sh_symbol">(</span>myViewModel<span class="sh_symbol">);</span></li><li><span class="sh_symbol">&lt;/</span>script<span class="sh_symbol">&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;script&gt;
+    var myViewModel = {
+        personName: 'Bob',
+        personAge: 12
+    };
+
+    ko.applyBindings(myViewModel);
+&lt;/script&gt;</pre></div></div>
+
+<h3>Html</h3>
+<div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_html snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_keyword">&lt;p&gt;</span>The person's name is <span class="sh_keyword">&lt;strong</span> <span class="sh_type">data-bind</span><span class="sh_symbol">=</span><span class="sh_string">"text: personName"</span><span class="sh_keyword">&gt;&lt;/strong&gt;&lt;/p&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;p&gt;The person's name is &lt;strong data-bind="text: personName"&gt;&lt;/strong&gt;&lt;/p&gt;</pre></div></div>

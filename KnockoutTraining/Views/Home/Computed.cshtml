@@ -6,6 +6,31 @@
 
 <h2>Computed Properties</h2>
 
+<h3>Result</h3>
+<div class="well">
+    <fieldset>
+        <legend>Person Info</legend>
+        <p>
+            <label>First Name: </label><input type="text" data-bind="value: personFirstName" />
+            <label>Last Name: </label><input type="text" data-bind="value: personLastName"/>
+        </p>
+    </fieldset>
+    <p>The person's name is <strong data-bind="text: personName"></strong></p>
+</div>
+
+<script>
+    function MyViewModel() {
+        var self = this;
+        self.personFirstName = ko.observable('Bob');
+        self.personLastName = ko.observable('Dobalina');
+        self.personName = ko.computed(function () {
+            return self.personFirstName() + " " + self.personLastName();
+        });
+    }
+
+    ko.applyBindings(new MyViewModel());
+</script>
+
 <h3>Script</h3>
 <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">&lt;</span>script<span class="sh_symbol">&gt;</span></li><li>    <span class="sh_keyword">function</span> <span class="sh_function">MyViewModel</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li>        <span class="sh_keyword">var</span> self <span class="sh_symbol">=</span> <span class="sh_keyword">this</span><span class="sh_symbol">;</span></li><li>        self<span class="sh_symbol">.</span>personFirstName <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observable</span><span class="sh_symbol">(</span><span class="sh_string">'Bob'</span><span class="sh_symbol">);</span></li><li>        self<span class="sh_symbol">.</span>personLastName <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observable</span><span class="sh_symbol">(</span><span class="sh_string">'Dobalina'</span><span class="sh_symbol">);</span></li><li class="box box-top" style="border-color: yellow; margin-left: -3.3em; "><span class="box-sp" style="width: 21px; ">&nbsp;</span>        self<span class="sh_symbol">.</span>personName <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">computed</span><span class="sh_symbol">(</span><span class="sh_keyword">function</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li class="box box-mid" style="border-color: yellow; margin-left: -3.3em; "><span class="box-sp" style="width: 21px; ">&nbsp;</span>            <span class="sh_keyword">return</span> self<span class="sh_symbol">.</span><span class="sh_function">personFirstName</span><span class="sh_symbol">()</span> <span class="sh_symbol">+</span> <span class="sh_string">" "</span> <span class="sh_symbol">+</span> self<span class="sh_symbol">.</span><span class="sh_function">personLastName</span><span class="sh_symbol">();</span></li><li class="box box-bot" style="border-color: yellow; margin-left: -3.3em; "><span class="box-sp" style="width: 21px; ">&nbsp;</span>        <span class="sh_cbracket">}</span><span class="sh_symbol">);</span></li><li>    <span class="sh_cbracket">}</span></li><li></li><li>    ko<span class="sh_symbol">.</span><span class="sh_function">applyBindings</span><span class="sh_symbol">(</span><span class="sh_keyword">new</span> <span class="sh_function">MyViewModel</span><span class="sh_symbol">());</span></li><li><span class="sh_symbol">&lt;/</span>script<span class="sh_symbol">&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;script&gt;
     function MyViewModel() {
@@ -29,28 +54,3 @@
     &lt;/p&gt;
 &lt;/fieldset&gt;
 &lt;p&gt;The person's name is &lt;strong data-bind="text: personName"&gt;&lt;/strong&gt;&lt;/p&gt;</pre></div></div>
-
-<h3>Result</h3>
-<div class="well">
-    <fieldset>
-        <legend>Person Info</legend>
-        <p>
-            <label>First Name: </label><input type="text" data-bind="value: personFirstName" />
-            <label>Last Name: </label><input type="text" data-bind="value: personLastName"/>
-        </p>
-    </fieldset>
-    <p>The person's name is <strong data-bind="text: personName"></strong></p>
-</div>
-
-<script>
-    function MyViewModel() {
-        var self = this;
-        self.personFirstName = ko.observable('Bob');
-        self.personLastName = ko.observable('Dobalina');
-        self.personName = ko.computed(function() {
-            return self.personFirstName() + " " + self.personLastName();
-        });
-    }
-
-    ko.applyBindings(new MyViewModel());
-</script>

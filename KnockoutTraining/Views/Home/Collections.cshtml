@@ -6,6 +6,30 @@
 
 <h2>Collections</h2>
 
+<h3>Result</h3>
+<div class="well">
+    <h5><span data-bind="text: personName"></span> has <span data-bind="text: favoriteFoods().length"></span> favorite foods. Here they are:</h5>
+    <ul data-bind="foreach: favoriteFoods">
+        <li><span data-bind="text: $data"></span></li>
+    </ul>
+    <input id="newFavorite" type="text" placeholder="Add favorite food" /><button data-bind="click: addFood">Add</button>
+</div>
+
+<script>
+    function MyViewModel() {
+        var self = this;
+        self.personName = ko.observable('Bob Dobalina');
+        self.favoriteFoods = ko.observableArray(['Tacos', 'Burritos']);
+
+        self.addFood = function () {
+            var newFavorite = $("#newFavorite").val();
+            self.favoriteFoods.push(newFavorite);
+        };
+    }
+
+    ko.applyBindings(new MyViewModel());
+</script>
+
 <h3>Script</h3>
 <div class="snippet-container"><div class="sh_default snippet-wrap"><div class="snippet-menu sh_sourceCode"><a class="snippet-window sh_url" href="#">pop-up</a><a class="snippet-text sh_url" href="#">text</a></div><pre class="shi_pre sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">&lt;</span>script<span class="sh_symbol">&gt;</span></li><li>    <span class="sh_keyword">function</span> <span class="sh_function">MyViewModel</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li>        <span class="sh_keyword">var</span> self <span class="sh_symbol">=</span> <span class="sh_keyword">this</span><span class="sh_symbol">;</span></li><li>        self<span class="sh_symbol">.</span>personName <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observable</span><span class="sh_symbol">(</span><span class="sh_string">'Bob Dobalina'</span><span class="sh_symbol">);</span></li><li style="border-color: yellow;" class="box"><span class="box-sp">&nbsp;</span>        self<span class="sh_symbol">.</span>favoriteFoods <span class="sh_symbol">=</span> ko<span class="sh_symbol">.</span><span class="sh_function">observableArray</span><span class="sh_symbol">([</span><span class="sh_string">'Tacos'</span><span class="sh_symbol">,</span> <span class="sh_string">'Burritos'</span><span class="sh_symbol">]);</span></li><li>        </li><li>        self<span class="sh_symbol">.</span>addFood <span class="sh_symbol">=</span> <span class="sh_keyword">function</span><span class="sh_symbol">()</span> <span class="sh_cbracket">{</span></li><li>            <span class="sh_keyword">var</span> newFavorite <span class="sh_symbol">=</span> $<span class="sh_symbol">(</span><span class="sh_string">"#newFavorite"</span><span class="sh_symbol">).</span><span class="sh_function">val</span><span class="sh_symbol">();</span></li><li>            self<span class="sh_symbol">.</span>favoriteFoods<span class="sh_symbol">.</span><span class="sh_function">push</span><span class="sh_symbol">(</span>newFavorite<span class="sh_symbol">);</span></li><li>        <span class="sh_cbracket">}</span><span class="sh_symbol">;</span></li><li>    <span class="sh_cbracket">}</span></li><li>    </li><li>    ko<span class="sh_symbol">.</span><span class="sh_function">applyBindings</span><span class="sh_symbol">(</span><span class="sh_keyword">new</span> <span class="sh_function">MyViewModel</span><span class="sh_symbol">());</span></li><li><span class="sh_symbol">&lt;/</span>script<span class="sh_symbol">&gt;</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;" tabindex="0" contenteditable="">&lt;script&gt;
     function MyViewModel() {
@@ -28,27 +52,3 @@
     &lt;li&gt;&lt;span data-bind="text: $data"&gt;&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;input id="newFavorite" type="text" placeholder="Add favorite food" /&gt;&lt;button data-bind="click: addFood"&gt;Add&lt;/button&gt;</pre></div></div>
-
-<h3>Result</h3>
-<div class="well">
-    <h5><span data-bind="text: personName"></span> has <span data-bind="text: favoriteFoods().length"></span> favorite foods. Here they are:</h5>
-    <ul data-bind="foreach: favoriteFoods">
-        <li><span data-bind="text: $data"></span></li>
-    </ul>
-    <input id="newFavorite" type="text" placeholder="Add favorite food" /><button data-bind="click: addFood">Add</button>
-</div>
-
-<script>
-    function MyViewModel() {
-        var self = this;
-        self.personName = ko.observable('Bob Dobalina');
-        self.favoriteFoods = ko.observableArray(['Tacos', 'Burritos']);
-        
-        self.addFood = function() {
-            var newFavorite = $("#newFavorite").val();
-            self.favoriteFoods.push(newFavorite);
-        };
-    }
-    
-    ko.applyBindings(new MyViewModel());
-</script>
