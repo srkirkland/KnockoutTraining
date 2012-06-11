@@ -33,6 +33,7 @@
             </tr>
         </tfoot>
     </table>
+    <p><button onclick="alert(ko.toJSON(orderViewModel));">Save Order</button></p>
 </div>
 
 <script>
@@ -84,7 +85,8 @@
         }
     };
 
-    ko.applyBindings(new MyViewModel());
+    var orderViewModel = new MyViewModel();
+    ko.applyBindings(orderViewModel);
 </script>
 
 <h3>Script</h3>
